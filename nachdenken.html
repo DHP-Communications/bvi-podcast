@@ -1,0 +1,167 @@
+<!--
+  Podigee-Webplayer – eigenes Layout für den BVI-Podcast "Nachdenken"
+  Basis: Podigee-Theme "Orbit". Alle Klassen und pp-Attribute, die das
+  Player-Skript braucht, sind erhalten. Neu: Metazeile (Folge · Dauer)
+  und Beschreibung im Kopfbereich (Klassen mit "bvi-").
+  DHP Communications – November 2026
+-->
+<div class="podcast-player podcast-player-orbit bvi-layout" pp-class-has-video="hasVideoEpisode">
+  <div class="podcast-player-inside">
+    <audio aria-hidden="true"></audio>
+
+    <div class="fallback-notice" role="status">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2 21h20z"/><path d="M12 10v5M12 18h.01"/></svg>
+      <span class="fallback-text"></span>
+      <button type="button" class="fallback-retry" pp-on-click="retryVideo" pp-html="translations.tryVideoAgain"></button>
+    </div>
+
+    <div class="cover-image-player-wrap" tabindex="0" role="group" pp-aria-label="title">
+      <div class="cover-image-wrap">
+        <video class="video-element" aria-hidden="true"></video>
+        <img class="cover-backdrop" pp-src="coverUrl" alt="">
+        <img class="cover-image" pp-src="coverUrl" alt="">
+
+        <div class="video-title-overlay" aria-hidden="true">
+          <p class="video-title" pp-html="title"></p>
+          <p class="video-subtitle" pp-html="subtitle"></p>
+        </div>
+
+        <div class="poster-chips" aria-hidden="true">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6h14v12H2z"/><path d="m16 10 6-3v10l-6-3"/></svg><span pp-html="translations.video"></span></span>
+          <span class="chip chip-duration" pp-text="humanDuration"></span>
+        </div>
+
+        <button type="button" class="splash-button">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>
+        </button>
+
+        <button type="button" class="watch-video-button" pp-on-click="switchToVideo" pp-aria-label="translations.watchVideo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 6h14v12H2z"/><path d="m16 10 6-3v10l-6-3"/></svg>
+        </button>
+
+        <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M2 6h14v12H2zM16 10l6-3v10l-6-3M3 3l18 18"/></svg>
+
+        <div class="center-flash" aria-hidden="true">
+          <span class="flash-play"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg></span>
+          <span class="flash-pause"><svg viewBox="0 0 24 24"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg></span>
+          <span class="flash-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 3v5h5"/><text x="12" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="currentColor" stroke="none">10</text></svg></span>
+          <span class="flash-forward"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/><path d="M21 3v5h-5"/><text x="12" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="currentColor" stroke="none">30</text></svg></span>
+        </div>
+
+        <div class="video-spinner" style="display: none;" aria-hidden="true"><span class="spinner"></span></div>
+        <div class="quality-toast" style="display: none;" role="status"></div>
+      </div>
+
+      <div class="main-player">
+        <div class="controls">
+          <button type="button" class="play-button" pp-aria-label="translations.playPause" pp-title="translations.playPause">
+            <svg class="play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor"/></svg>
+            <svg class="stop" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 4h4v16H6zM14 4h4v16h-4z" fill="currentColor"/></svg>
+          </button>
+
+          <button type="button" class="previous-button skip-backward-button icon-button" pp-title="translations.previous" pp-aria-label="translations.previous">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M6 5v14"/><path d="M18 5 9 12l9 7z" fill="currentColor"/></svg>
+          </button>
+
+          <button type="button" class="backward-button icon-button" pp-title="translations.backward" pp-aria-label="translations.backward">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M3.5 12a8.5 8.5 0 1 0 2.5-6"/><path d="M3 3v5h5"/><text x="12" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="currentColor" stroke="none">10</text></svg>
+          </button>
+
+          <button type="button" class="forward-button icon-button" pp-title="translations.forward" pp-aria-label="translations.forward">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true" focusable="false"><path d="M20.5 12a8.5 8.5 0 1 1-2.5-6"/><path d="M21 3v5h-5"/><text x="12" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="currentColor" stroke="none">30</text></svg>
+          </button>
+
+          <button type="button" class="next-button skip-forward-button icon-button" pp-title="translations.next" pp-aria-label="translations.next">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M18 5v14"/><path d="M6 5l9 7-9 7z" fill="currentColor"/></svg>
+          </button>
+
+          <div class="volume">
+            <button type="button" class="volume-button icon-button" pp-aria-label="translations.mute" pp-title="translations.mute">
+              <svg class="volume-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+              <svg class="volume-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 6 6M22 9l-6 6"/></svg>
+            </button>
+            <input type="range" class="volume-slider" min="0" max="100" step="5" value="100" pp-aria-label="translations.volume">
+          </div>
+
+          <span class="controls-spacer"></span>
+
+          <progressbar></progressbar>
+
+          <button type="button" class="speed-toggle" pp-title="translations.changePlaybackSpeed" pp-aria-label="translations.changePlaybackSpeed">1x</button>
+
+          <div class="quality-selector">
+            <button type="button" class="quality-button icon-button" aria-haspopup="menu" aria-expanded="false" pp-aria-label="translations.settings" pp-title="translations.settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+            </button>
+            <div class="quality-menu" role="menu" pp-aria-label="translations.settings"></div>
+          </div>
+
+          <div class="mode-toggle mode-toggle-controls" role="group" pp-aria-label="translations.playbackMode" pp-if="hasVideoEpisode">
+            <button type="button" class="mode-watch" pp-on-click="switchToVideo" aria-pressed="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 6h14v12H2z"/><path d="m16 10 6-3v10l-6-3"/></svg><span pp-html="translations.watch"></span>
+            </button>
+            <button type="button" class="mode-listen" pp-on-click="switchToAudio" aria-pressed="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M3 14h4v7H3zM17 14h4v7h-4z"/></svg><span pp-html="translations.listen"></span>
+            </button>
+          </div>
+
+          <button type="button" class="fullscreen-button icon-button" pp-on-click="toggleFullscreen" pp-title="translations.fullscreen" pp-aria-label="translations.fullscreen">
+            <svg class="fullscreen-enter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M3 8V3h5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg>
+            <svg class="fullscreen-exit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M8 3v5H3M21 8h-5V3M16 21v-5h5M3 16h5v5"/></svg>
+          </button>
+
+          <button type="button" class="compact-watch-button icon-button" pp-if="hasVideoEpisode" pp-on-click="watchFullscreen" pp-aria-label="translations.watchVideo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M2 6h14v12H2z"/><path d="m16 10 6-3v10l-6-3"/></svg>
+          </button>
+
+          <a class="compact-more-link icon-button" pp-if="url" pp-href="url" target="_blank" rel="noopener" pp-aria-label="translations.openEpisodePage">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true" focusable="false"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v6H4V6h6"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="player-info-wrap">
+        <div class="episode-basic-info">
+          <p class="episode-eyebrow">
+            <span class="eyebrow-podcast" pp-html="podcastTitle"></span><span class="eyebrow-now" pp-html="translations.now"></span><span class="eyebrow-chapter"> · <span class="current-chapter-number"></span></span>
+          </p>
+          <h1 class="episode-title">
+            <a pp-href="url" pp-if="url" pp-html="title" target="_parent"></a>
+            <span pp-unless="url" pp-html="title"></span>
+          </h1>
+          <p class="bvi-meta">
+            <span pp-if="number">Folge <span pp-text="number"></span></span><span class="bvi-meta-dot" pp-if="number"> · </span><span pp-text="humanDuration"></span>
+          </p>
+          <p class="current-chapter-title"></p>
+          <p class="episode-subtitle" pp-html="subtitle"></p>
+          <div class="bvi-description" pp-html="description"></div>
+          <p class="episode-context"><span pp-html="podcastTitle"></span> · <span pp-html="title"></span></p>
+        </div>
+
+        <div class="mode-toggle mode-toggle-info" role="group" pp-aria-label="translations.playbackMode" pp-if="hasVideoEpisode">
+          <button type="button" class="mode-watch" pp-on-click="switchToVideo" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M2 6h14v12H2z"/><path d="m16 10 6-3v10l-6-3"/></svg><span pp-html="translations.watch"></span>
+          </button>
+          <button type="button" class="mode-listen" pp-on-click="switchToAudio" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M3 14h4v7H3zM17 14h4v7h-4z"/></svg><span pp-html="translations.listen"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-left">
+        <a href="https://podigee.com/" class="podigee-link" target="_blank" pp-title="translations.podigeeTitle" pp-aria-label="translations.podigeeTitle" pp-if="showPodigeeBranding">Podigee</a>
+      </div>
+      <div class="footer-right">
+        <nav class="platform-links" pp-aria-label="translations.listenOn" hidden><ul></ul></nav>
+        <div class="buttons"></div>
+      </div>
+    </div>
+
+    <div class="panels"></div>
+
+    <div class="copy-status" role="status" aria-live="polite"></div>
+    <span class="platform-tooltip" aria-hidden="true"></span>
+  </div>
+</div>
