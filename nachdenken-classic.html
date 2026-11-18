@@ -19,6 +19,14 @@
     el.classList.add('bvi-fit');
     var lh = parseFloat(getComputedStyle(el).lineHeight) || 22;
     var max = lh * (window.innerWidth <= 767 ? 2 : LINES) + 2;
+    var info = el.closest('.player-info-wrap');
+    var basic = el.closest('.episode-basic-info');
+    var splash = info && info.querySelector('.splash-button');
+    if (window.innerWidth > 767 && basic && splash && splash.offsetHeight > 0) {
+      el.textContent = '';
+      var space = splash.getBoundingClientRect().top - basic.getBoundingClientRect().bottom;
+      if (space > max) max = space;
+    }
     var parts = sentences(full), base = '', shown = '';
     for (var i = 0; i < parts.length; i++) {
       var test = base ? base + ' ' + parts[i] : parts[i];
