@@ -1,0 +1,84 @@
+@import url("https://player.podigee-cdn.net/podcast-player/themes/standard/index.css");
+
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 400;
+  src: url("fonts/lato-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 400;
+  src: url("fonts/lato-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 700;
+  src: url("fonts/lato-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 700;
+  src: url("fonts/lato-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 900;
+  src: url("fonts/lato-latin-900-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "BVI Lato"; font-style: normal; font-display: swap; font-weight: 900;
+  src: url("fonts/lato-latin-ext-900-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+html .podcast-player.podcast-player-redesign[class] {
+  --podigee-color: #7ea207;
+  --main-player-color: #7ea207;
+  --main-player-color-hover: #7ea207;
+  --main-player-light-color: #e8efd2;
+  --main-player-background-color: #f5f5f5;
+  --player-contrast-text: #ffffff;
+  --black: #000000;
+  --white: #ffffff;
+  --grey: #555555;
+  --border-player-color: rgba(0, 0, 0, 0.18);
+  font-family: "BVI Lato", Lato, Helvetica, Arial, sans-serif !important;
+}
+
+html .podcast-player-redesign[class] *,
+html .podcast-player-redesign[class] button,
+html .podcast-player-redesign[class] select,
+html .podcast-player-redesign[class] input {
+  font-family: "BVI Lato", Lato, Helvetica, Arial, sans-serif !important;
+}
+
+html .podcast-player-redesign[class] .bvi-teaser {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  margin: 0 0 14px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333333;
+}
+
+html .podcast-player-redesign[class] .bvi-teaser.bvi-fit {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: hidden;
+}
+
+html .podcast-player-redesign[class] .bvi-teaser p {
+  margin: 0;
+  display: inline;
+}
+
+html .podcast-player-redesign[class] .bvi-teaser:empty {
+  display: none;
+}
+
+html .podcast-player-redesign[class] .player-info-wrap:has(.splash-button[style*="none"]) .bvi-teaser {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  html .podcast-player-redesign[class] .bvi-teaser {
+    -webkit-line-clamp: 2;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 575px) {
+  html .podcast-player-redesign[class] .bvi-teaser {
+    display: none;
+  }
+}
