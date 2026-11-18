@@ -22,11 +22,15 @@
     var info = el.closest('.player-info-wrap');
     var basic = el.closest('.episode-basic-info');
     var splash = info && info.querySelector('.splash-button');
-    if (window.innerWidth > 767 && basic && splash && splash.offsetHeight > 0) {
+    var player = info && info.querySelector('.main-player');
+    var playing = !(splash && splash.offsetHeight > 0) && player && player.offsetHeight > 0;
+    var target = playing ? player : splash;
+    if (window.innerWidth > 767 && basic && target && target.offsetHeight > 0) {
       el.textContent = '';
-      var space = splash.getBoundingClientRect().top - basic.getBoundingClientRect().bottom;
-      if (space > max) max = space;
+      var space = target.getBoundingClientRect().top - basic.getBoundingClientRect().bottom;
+      if (playing) max = space; else if (space > max) max = space;
     }
+    if (max < lh) { el.textContent = ''; el.setAttribute('data-shown', ''); return; }
     var parts = sentences(full), base = '', shown = '';
     for (var i = 0; i < parts.length; i++) {
       var test = base ? base + ' ' + parts[i] : parts[i];
@@ -36,6 +40,7 @@
       base = test;
       shown = el.textContent;
     }
+    if (!shown && playing) { el.textContent = ''; el.setAttribute('data-shown', ''); return; }
     if (!shown) { el.classList.remove('bvi-fit'); shown = full; }
     el.textContent = shown;
     el.setAttribute('data-shown', shown);
@@ -52,6 +57,16 @@
       } else if (list[i].addedNodes && list[i].addedNodes.length) { schedule(); return; }
     }
   }).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+  new MutationObserver(function (list) {
+    for (var i = 0; i < list.length; i++) {
+      var c = list[i].target.classList;
+      if (c && (c.contains('splash-button') || c.contains('main-player'))) {
+        var els = document.querySelectorAll('.bvi-teaser');
+        for (var k = 0; k < els.length; k++) { var f = els[k].getAttribute('data-full'); if (f) { els[k].textContent = f; els[k].setAttribute('data-shown', ''); } }
+        schedule(); return;
+      }
+    }
+  }).observe(document.documentElement, { attributes: true, attributeFilter: ['style'], subtree: true });
   window.addEventListener('resize', function () {
     var els = document.querySelectorAll('.bvi-teaser');
     for (var i = 0; i < els.length; i++) { var f = els[i].getAttribute('data-full'); if (f) { els[i].textContent = f; els[i].setAttribute('data-shown', ''); } }

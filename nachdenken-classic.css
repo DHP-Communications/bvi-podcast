@@ -66,11 +66,11 @@ html .podcast-player-redesign[class] .bvi-teaser:empty {
   display: none;
 }
 
-html .podcast-player-redesign[class] .player-info-wrap:has(.splash-button[style*="none"]) .bvi-teaser {
-  display: none;
-}
-
 @media (max-width: 767px) {
+  html .podcast-player-redesign[class] .player-info-wrap:has(.splash-button[style*="none"]) .bvi-teaser {
+    display: none;
+  }
+
   html .podcast-player-redesign[class] .bvi-teaser {
     -webkit-line-clamp: 2;
     font-size: 14px;
